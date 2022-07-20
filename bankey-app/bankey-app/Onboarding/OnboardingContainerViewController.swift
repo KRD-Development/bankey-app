@@ -9,7 +9,7 @@ import UIKit
 
 class OnBoardingContainerViewController:UIViewController {
     
-    let closeButton = UIButton()
+    let closeButton = UIButton(type: .system)
     
     let pageViewController: UIPageViewController
     var pages = [UIViewController]()
@@ -39,50 +39,10 @@ class OnBoardingContainerViewController:UIViewController {
     }
     
     override func viewDidLoad() {
-        
-        view.backgroundColor = .systemPurple
 
-        addChild(pageViewController)
-        view.addSubview(pageViewController.view)
-        view.addSubview(closeButton)
-
-        pageViewController.didMove(toParent: self)
-
-        pageViewController.dataSource = self
-        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: pageViewController.view.topAnchor),
-            view.leadingAnchor.constraint(equalTo: pageViewController.view.leadingAnchor),
-            view.trailingAnchor.constraint(equalTo: pageViewController.view.trailingAnchor),
-            view.bottomAnchor.constraint(equalTo: pageViewController.view.bottomAnchor),
-        ])
-
-        pageViewController.setViewControllers([pages.first!], direction: .forward, animated: true, completion: nil)
-        currentVC = pages.first!
-        
-        // Close Button
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        var closeConfig = UIButton.Configuration.borderless()
-        closeConfig.imagePadding = 8
-        closeConfig.title = "Close"
-        closeConfig.buttonSize = .small
-        
-        closeButton.configuration = closeConfig
-        closeButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
-        
-        NSLayoutConstraint.activate([
-            //            closeButton.topAnchor.constraint(equalToSystemSpacingBelow: view.topAnchor, multiplier: 4),
-            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 45),
-            closeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
-            //            closeButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            //            closeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            //            view.trailingAnchor.constraint(equalToSystemSpacingAfter: closeButton.trailingAnchor, multiplier: 1)
-        ])
-        
-//        style()
-//        layout()
+        setup()
+        style()
+        layout()
         
         super.viewDidLoad()
     }
@@ -90,47 +50,40 @@ class OnBoardingContainerViewController:UIViewController {
 }
 
 extension OnBoardingContainerViewController {
+    
+    private func setup() {
+        
+        addChild(pageViewController)
+        view.addSubview(pageViewController.view)
+
+        pageViewController.didMove(toParent: self)
+        pageViewController.dataSource = self
+
+        pageViewController.setViewControllers([pages.first!], direction: .forward, animated: true, completion: nil)
+        currentVC = pages.first!
+        
+    }
+    
     private func style() {
         
         view.backgroundColor = .systemPurple
         
-//        addChild(pageViewController)
-//        view.addSubview(pageViewController.view)
-        
-//        pageViewController.didMove(toParent: self)
-//        pageViewController.dataSource = self
-        
-//        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
-//
-//        NSLayoutConstraint.activate([
-//            view.topAnchor.constraint(equalTo: pageViewController.view.topAnchor),
-//            view.leadingAnchor.constraint(equalTo: pageViewController.view.leadingAnchor),
-//            view.trailingAnchor.constraint(equalTo: pageViewController.view.trailingAnchor),
-//            view.bottomAnchor.constraint(equalTo: pageViewController.view.bottomAnchor),
-//        ])
+        // Page View Controller
+        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
         // Close Button
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         
         var closeConfig = UIButton.Configuration.borderless()
         closeConfig.imagePadding = 8
-        closeConfig.title = "Close"
-        closeConfig.buttonSize = .small
-        
         closeButton.configuration = closeConfig
+        closeButton.setTitle("Close", for:[])
         closeButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
+        
+        view.addSubview(closeButton)
     }
     
     private func layout() {
-        view.addSubview(closeButton)
-        addChild(pageViewController)
-        view.addSubview(pageViewController.view)
-        
-        pageViewController.didMove(toParent: self)
-        pageViewController.dataSource = self
-        
-        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             view.topAnchor.constraint(equalTo: pageViewController.view.topAnchor),
             view.leadingAnchor.constraint(equalTo: pageViewController.view.leadingAnchor),
@@ -138,14 +91,9 @@ extension OnBoardingContainerViewController {
             view.bottomAnchor.constraint(equalTo: pageViewController.view.bottomAnchor),
         ])
         
-        
         NSLayoutConstraint.activate([
-            //            closeButton.topAnchor.constraint(equalToSystemSpacingBelow: view.topAnchor, multiplier: 4),
-            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 45),
-            closeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
-            //            closeButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            //            closeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            //            view.trailingAnchor.constraint(equalToSystemSpacingAfter: closeButton.trailingAnchor, multiplier: 1)
+            closeButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2),
+            closeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2)
         ])
     }
 }
@@ -153,7 +101,7 @@ extension OnBoardingContainerViewController {
 extension OnBoardingContainerViewController {
     
     @objc
-    private func closeTapped() {
+    private func closeTapped(_ sender: UIButton) {
         print("Close was tapped!")
     }
 }

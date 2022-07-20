@@ -9,13 +9,11 @@ import UIKit
 
 class OnboardingViewController:UIViewController {
     
-    
-    
     let stackView = UIStackView()
     let imageView = UIImageView()
     let label = UILabel()
     
-    let nextButton = UIButton()
+    let nextButton = UIButton(type: .system)
     
     let heroImageName:String
     let titleText:String
@@ -45,16 +43,6 @@ extension OnboardingViewController {
         // View
         view.backgroundColor = .systemBackground
         
-//        // Close Button
-//        closeButton.translatesAutoresizingMaskIntoConstraints = false
-//        var closeConfig = UIButton.Configuration.borderless()
-//        closeConfig.imagePadding = 8
-//        closeConfig.title = "Close"
-//        closeConfig.buttonSize = .small
-//    
-//        closeButton.configuration = closeConfig
-//        closeButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
-        
         // Stackview
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -67,7 +55,6 @@ extension OnboardingViewController {
         
         // Label
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         label.text = titleText
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.adjustsFontForContentSizeCategory = true
@@ -80,8 +67,6 @@ extension OnboardingViewController {
         var nextConfig = UIButton.Configuration.borderless()
         nextConfig.imagePadding = 8
         nextConfig.title = "Next"
-        nextConfig.buttonSize = .medium
-        
         nextButton.configuration = nextConfig
         nextButton.addTarget(self, action: #selector(nextTapped), for: .primaryActionTriggered)
 
@@ -91,18 +76,8 @@ extension OnboardingViewController {
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(label)
         
-//        view.addSubview(closeButton)
         view.addSubview(stackView)
         view.addSubview(nextButton)
-        
-//        NSLayoutConstraint.activate([
-////            closeButton.topAnchor.constraint(equalToSystemSpacingBelow: view.topAnchor, multiplier: 4),
-//            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 45),
-//            closeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
-////            closeButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-////            closeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-////            view.trailingAnchor.constraint(equalToSystemSpacingAfter: closeButton.trailingAnchor, multiplier: 1)
-//        ])
 
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -112,8 +87,8 @@ extension OnboardingViewController {
         ])
         
         NSLayoutConstraint.activate([
-            nextButton.bottomAnchor.constraint(equalToSystemSpacingBelow: view.bottomAnchor, multiplier: -2),
-            nextButton.trailingAnchor.constraint(equalToSystemSpacingAfter: view.trailingAnchor, multiplier: -3)
+            nextButton.bottomAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.bottomAnchor, multiplier: 4),
+            nextButton.trailingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.trailingAnchor, multiplier: -2)
         ])
         
     }
@@ -121,7 +96,7 @@ extension OnboardingViewController {
 
 extension OnboardingViewController {
     @objc
-    private func nextTapped() {
+    private func nextTapped(_ sender: UIButton) {
         print("Next was tapped")
     }
     
