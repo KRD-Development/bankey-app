@@ -7,14 +7,13 @@
 
 import UIKit
 
+let appColor: UIColor = .systemTeal
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    let loginViewController = LoginViewController()
-    let onboardingContainerViewController = OnBoardingContainerViewController()
-    let dummyViewController = DummyViewController()
+    let mainViewController = MainViewController()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
@@ -22,11 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
         
-        loginViewController.delegate = self
-        dummyViewController.delegate = self
-        onboardingContainerViewController.delegate = self
-        
-        window?.rootViewController = loginViewController
+        window?.rootViewController = mainViewController
+//        mainViewController.selectedIndex = 1  // how to select another tab programmatically
         return true
     }
 
@@ -52,25 +48,25 @@ extension AppDelegate {
 }
 
 // MARK: Actions
-extension AppDelegate: LoginViewControllerDelegate {
-    func didLogin() {
-        if LocalState.hasOnboarded {
-            setRootViewController(dummyViewController)
-        } else {
-            setRootViewController(onboardingContainerViewController)
-        }
-    }
-}
-
-extension AppDelegate: LogoutDelegate {
-    func didLogout() {
-        setRootViewController(loginViewController)
-    }
-}
-
-extension AppDelegate: OnboardingContainerViewControllerDelegate {
-    func didFinishOnboarding() {
-        LocalState.hasOnboarded = true
-        setRootViewController(dummyViewController)
-    }
-}
+//extension AppDelegate: LoginViewControllerDelegate {
+//    func didLogin() {
+//        if LocalState.hasOnboarded {
+//            setRootViewController(dummyViewController)
+//        } else {
+//            setRootViewController(onboardingContainerViewController)
+//        }
+//    }
+//}
+//
+//extension AppDelegate: LogoutDelegate {
+//    func didLogout() {
+//        setRootViewController(loginViewController)
+//    }
+//}
+//
+//extension AppDelegate: OnboardingContainerViewControllerDelegate {
+//    func didFinishOnboarding() {
+//        LocalState.hasOnboarded = true
+//        setRootViewController(dummyViewController)
+//    }
+//}

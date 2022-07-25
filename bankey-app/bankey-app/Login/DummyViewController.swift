@@ -26,7 +26,6 @@ class DummyViewController:UIViewController {
 extension DummyViewController {
     
     private func style() {
-        
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.axis = .vertical
