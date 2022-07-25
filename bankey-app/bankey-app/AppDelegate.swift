@@ -10,9 +10,12 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var hasOnboarded = false
     var window: UIWindow?
+    
     let loginViewController = LoginViewController()
     let onboardingContainerViewController = OnBoardingContainerViewController()
+    let dummyViewController = DummyViewController()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
@@ -21,37 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = .systemBackground
         
         loginViewController.delegate = self
+        dummyViewController.delegate = self
         onboardingContainerViewController.delegate = self
         
         window?.rootViewController = loginViewController
-//        window?.rootViewController = onboardingContainerViewController
         return true
     }
 
 }
 
-extension AppDelegate: LoginViewControllerDelegate {
-    func didLogin() {
-        
-        print("LOGGED IN!")
-        setRootViewController(onboardingContainerViewController)
-        
-        
-//        window?.rootViewController = onboardingContainerViewController
-//        if LocalState.hasOnboarded {
-//            setRootViewController(dummyViewController)
-//        } else {
-//            setRootViewController(onboardingViewController)
-//        }
-    }
-}
-
-extension AppDelegate: OnboardingContainerViewControllerDelegate {
-    func didFinishOnboarding() {
-        print("=== Did Finish Onboarding!!")
-    }
-}
-
+// MARK: Navigation
 extension AppDelegate {
     func setRootViewController(_ vc: UIViewController, animated: Bool = true) {
         guard animated, let window = self.window else {
@@ -67,5 +49,36 @@ extension AppDelegate {
                           options: .transitionCrossDissolve,
                           animations: nil,
                           completion: nil)
+    }
+}
+
+// MARK: Actions
+extension AppDelegate: LoginViewControllerDelegate {
+    func didLogin() {
+        print("=== LOGGED IN!")
+        
+//        setRootViewController(onboardingContainerViewController)
+//        if LocalState.hasOnboarded {
+        
+        if(hasOnboarded) {
+            setRootViewController(dummyViewController)
+        } else {
+            setRootViewController(onboardingContainerViewController)
+        }
+    }
+}
+
+extension AppDelegate: LogoutDelegate {
+    func didLogout() {
+        print("=== Did Logout!!")
+        setRootViewController(loginViewController)
+    }
+}
+
+extension AppDelegate: OnboardingContainerViewControllerDelegate {
+    func didFinishOnboarding() {
+        print("=== Did Finish Onboarding!!")
+        hasOnboarded = true
+        setRootViewController(dummyViewController)
     }
 }

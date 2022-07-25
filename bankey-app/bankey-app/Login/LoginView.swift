@@ -15,7 +15,6 @@ class LoginView:UIView {
     let passwordTextField = UITextField()
     let dividerView = UIView()
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -48,6 +47,7 @@ extension LoginView {
         userNameTextField.translatesAutoresizingMaskIntoConstraints = false
         userNameTextField.delegate = self
         userNameTextField.placeholder = "Username"
+        userNameTextField.becomeFirstResponder()
         
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.delegate = self

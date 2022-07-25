@@ -11,6 +11,10 @@ protocol LoginViewControllerDelegate: AnyObject {
     func didLogin()
 }
 
+protocol LogoutDelegate: AnyObject {
+    func didLogout()
+}
+
 class LoginViewController: UIViewController {
 
     let appLabel = UILabel()
@@ -37,6 +41,16 @@ class LoginViewController: UIViewController {
         style()
         layout()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        signInButton.configuration?.showsActivityIndicator = false
+        loginView.userNameTextField.text = ""
+        loginView.passwordTextField.text = ""
+        loginView.userNameTextField.isEnabled = true
+        loginView.userNameTextField.becomeFirstResponder()
+        loginView.passwordTextField.isEnabled = true
+    }
+    
 }
 
 // Mark: Style and Layout
@@ -123,11 +137,6 @@ extension LoginViewController {
 
 // Mark: Actions
 extension LoginViewController {
-    
-    private func resetForm() {
-        loginView.userNameTextField.isEnabled = true
-        loginView.passwordTextField.isEnabled = true
-    }
     
     @objc private func signInTapped(sender: UIButton) {
         errorMessageLabel.isHidden = true

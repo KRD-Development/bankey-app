@@ -71,7 +71,6 @@ extension OnBoardingContainerViewController {
         pageViewController.dataSource = self
 
         pageViewController.setViewControllers([pages.first!], direction: .forward, animated: true, completion: nil)
-//        currentVC = pages.first!
         
     }
     
