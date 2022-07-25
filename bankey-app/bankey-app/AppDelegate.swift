@@ -10,7 +10,6 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var hasOnboarded = false
     var window: UIWindow?
     
     let loginViewController = LoginViewController()
@@ -55,12 +54,7 @@ extension AppDelegate {
 // MARK: Actions
 extension AppDelegate: LoginViewControllerDelegate {
     func didLogin() {
-        print("=== LOGGED IN!")
-        
-//        setRootViewController(onboardingContainerViewController)
-//        if LocalState.hasOnboarded {
-        
-        if(hasOnboarded) {
+        if LocalState.hasOnboarded {
             setRootViewController(dummyViewController)
         } else {
             setRootViewController(onboardingContainerViewController)
@@ -70,15 +64,13 @@ extension AppDelegate: LoginViewControllerDelegate {
 
 extension AppDelegate: LogoutDelegate {
     func didLogout() {
-        print("=== Did Logout!!")
         setRootViewController(loginViewController)
     }
 }
 
 extension AppDelegate: OnboardingContainerViewControllerDelegate {
     func didFinishOnboarding() {
-        print("=== Did Finish Onboarding!!")
-        hasOnboarded = true
+        LocalState.hasOnboarded = true
         setRootViewController(dummyViewController)
     }
 }
