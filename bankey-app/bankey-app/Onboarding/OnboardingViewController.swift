@@ -37,6 +37,7 @@ class OnboardingViewController:UIViewController {
     
 }
 
+// Mark: Style and Layout
 extension OnboardingViewController {
     private func style() {
         
@@ -94,14 +95,10 @@ extension OnboardingViewController {
     }
 }
 
+// Mark: Actions
 extension OnboardingViewController {
     @objc
     private func nextTapped(_ sender: UIButton) {
         print("Next was tapped")
     }
-    
-//    @objc
-//    private func closeTapped() {
-//        print("Close was tapped!")
-//    }
 }

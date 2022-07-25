@@ -7,9 +7,16 @@
 
 import UIKit
 
+protocol OnboardingContainerViewControllerDelegate: AnyObject {
+    func didFinishOnboarding()
+}
+
 class OnBoardingContainerViewController:UIViewController {
     
+//    weak var onboardingContainerDelegate:OnboardingContainerViewControllerDelegate?
+    
     let closeButton = UIButton(type: .system)
+    let backButton = UIButton(type: .system)
     
     let pageViewController: UIPageViewController
     var pages = [UIViewController]()
@@ -17,6 +24,8 @@ class OnBoardingContainerViewController:UIViewController {
         didSet {
         }
     }
+    
+    weak var delegate: OnboardingContainerViewControllerDelegate?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -49,8 +58,10 @@ class OnBoardingContainerViewController:UIViewController {
     
 }
 
+// Mark: Setup, Styling and Layout
 extension OnBoardingContainerViewController {
     
+    // Mark: Setup
     private func setup() {
         
         addChild(pageViewController)
@@ -60,10 +71,11 @@ extension OnBoardingContainerViewController {
         pageViewController.dataSource = self
 
         pageViewController.setViewControllers([pages.first!], direction: .forward, animated: true, completion: nil)
-        currentVC = pages.first!
+//        currentVC = pages.first!
         
     }
     
+    // Mark: Styling
     private func style() {
         
         view.backgroundColor = .systemPurple
@@ -73,16 +85,22 @@ extension OnBoardingContainerViewController {
         
         // Close Button
         closeButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        var closeConfig = UIButton.Configuration.borderless()
-        closeConfig.imagePadding = 8
-        closeButton.configuration = closeConfig
         closeButton.setTitle("Close", for:[])
         closeButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
         
         view.addSubview(closeButton)
+        
+        // Done Button
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.configuration?.imagePadding = 8
+        backButton.setTitle("Back", for: [])
+        backButton.addTarget(self, action: #selector(backTapped), for: .primaryActionTriggered)
+        
+//        view.addSubview(doneButton)
+        
     }
     
+    // Mark: Layout
     private func layout() {
         NSLayoutConstraint.activate([
             view.topAnchor.constraint(equalTo: pageViewController.view.topAnchor),
@@ -98,14 +116,19 @@ extension OnBoardingContainerViewController {
     }
 }
 
+// Mark: Actions
 extension OnBoardingContainerViewController {
-    
     @objc
     private func closeTapped(_ sender: UIButton) {
-        print("Close was tapped!")
+        delegate?.didFinishOnboarding()
+    }
+    
+    @objc
+    private func backTapped(_ sender: UIButton) {
+//        if (currentVC !)
+        print("=== Back tapped!")
     }
 }
-
 
 extension OnBoardingContainerViewController:UIPageViewControllerDataSource {
     

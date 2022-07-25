@@ -7,13 +7,20 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func didLogin()
+}
+
 class LoginViewController: UIViewController {
 
     let appLabel = UILabel()
-    let appDescriptionLabel = UILabel()
+    let subtitleLabel = UILabel()
+    
     let loginView = LoginView()
     let signInButton = UIButton(type: .system)
     let errorMessageLabel = UILabel()
+    
+    weak var delegate: LoginViewControllerDelegate?
     
     var username:String? {
         return loginView.userNameTextField.text
@@ -32,11 +39,12 @@ class LoginViewController: UIViewController {
     }
 }
 
+// Mark: Style and Layout
 extension LoginViewController {
     private func style() {
         
         appLabel.translatesAutoresizingMaskIntoConstraints = false
-        appDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         loginView.translatesAutoresizingMaskIntoConstraints = false
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -44,11 +52,11 @@ extension LoginViewController {
         appLabel.font = UIFont(name: "Arial", size: 30)
         appLabel.text = "Bankey"
         
-        appDescriptionLabel.textColor = .black
-        appDescriptionLabel.font = UIFont(name: "Arial", size: 16)
-        appDescriptionLabel.text = "Your premium source for all things banking!"
-        appDescriptionLabel.numberOfLines = 0
-        appDescriptionLabel.textAlignment = .center
+        subtitleLabel.textColor = .black
+        subtitleLabel.font = UIFont(name: "Arial", size: 16)
+        subtitleLabel.text = "Your premium source for all things banking!"
+        subtitleLabel.numberOfLines = 0
+        subtitleLabel.textAlignment = .center
         
         var buttonConfig = UIButton.Configuration.filled()
         buttonConfig.imagePadding = 8
@@ -68,7 +76,7 @@ extension LoginViewController {
     private func layout() {
         
         view.addSubview(appLabel)
-        view.addSubview(appDescriptionLabel)
+        view.addSubview(subtitleLabel)
         view.addSubview(loginView)
         view.addSubview(signInButton)
         view.addSubview(errorMessageLabel)
@@ -76,15 +84,15 @@ extension LoginViewController {
         
         // App Label
         NSLayoutConstraint.activate([
-            appLabel.bottomAnchor.constraint(equalTo: appDescriptionLabel.topAnchor, constant: -24),
+            appLabel.bottomAnchor.constraint(equalTo: subtitleLabel.topAnchor, constant: -24),
             appLabel.centerXAnchor.constraint(equalTo: loginView.centerXAnchor),
         ])
         
         // App Description Label
         NSLayoutConstraint.activate([
-            appDescriptionLabel.bottomAnchor.constraint(equalTo: loginView.topAnchor, constant: -24),
-            appDescriptionLabel.leadingAnchor.constraint(equalTo: loginView.leadingAnchor, constant: 48),
-            appDescriptionLabel.trailingAnchor.constraint(equalTo: loginView.trailingAnchor, constant: -48),
+            subtitleLabel.bottomAnchor.constraint(equalTo: loginView.topAnchor, constant: -24),
+            subtitleLabel.leadingAnchor.constraint(equalTo: loginView.leadingAnchor, constant: 48),
+            subtitleLabel.trailingAnchor.constraint(equalTo: loginView.trailingAnchor, constant: -48),
         ])
         
         // LoginView
@@ -96,7 +104,7 @@ extension LoginViewController {
         ])
         
         
-        // Button
+        // Sign In Button
         NSLayoutConstraint.activate([
             signInButton.topAnchor.constraint(equalToSystemSpacingBelow: loginView.bottomAnchor, multiplier: 2),
             signInButton.leadingAnchor.constraint(equalTo: loginView.leadingAnchor),
@@ -132,17 +140,17 @@ extension LoginViewController {
             return
         }
         
-        if username.isEmpty || password.isEmpty {
-            configureView(withMessage: ErrorType.required.rawValue)
-            return
-        }
+//        if username.isEmpty || password.isEmpty {
+//            configureView(withMessage: ErrorType.required.rawValue)
+//            return
+//        }
         
-        if(username ==  testUsername && password == testPassword) {
+        // TODO: swap out usage of test user/password
+        if username == "" && password == "" {
             signInButton.configuration?.showsActivityIndicator = true
-            return
+            delegate?.didLogin()
         } else {
-            configureView(withMessage: ErrorType.invalidLogin.rawValue)
-            return
+            configureView(withMessage: "Incorrect username / password")
         }
         
     }
