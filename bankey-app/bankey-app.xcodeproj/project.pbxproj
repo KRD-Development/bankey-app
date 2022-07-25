@@ -18,6 +18,9 @@
 		AEAEC764288EC4E000812B1C /* LocalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEC763288EC4E000812B1C /* LocalState.swift */; };
 		AEAEC766288EEE1F00812B1C /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEC765288EEE1F00812B1C /* UIViewController+Utils.swift */; };
 		AEAEC768288EF00500812B1C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEC767288EF00500812B1C /* MainViewController.swift */; };
+		AEAEC76B288F1BC000812B1C /* AccountSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEC76A288F1BC000812B1C /* AccountSummaryViewController.swift */; };
+		AEAEC76D288F218400812B1C /* AccountSummaryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEC76C288F218400812B1C /* AccountSummaryHeaderView.swift */; };
+		AEAEC76F288F21D000812B1C /* AccountSummaryHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEAEC76E288F21D000812B1C /* AccountSummaryHeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		AEAEC763288EC4E000812B1C /* LocalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalState.swift; sourceTree = "<group>"; };
 		AEAEC765288EEE1F00812B1C /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
 		AEAEC767288EF00500812B1C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		AEAEC76A288F1BC000812B1C /* AccountSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSummaryViewController.swift; sourceTree = "<group>"; };
+		AEAEC76C288F218400812B1C /* AccountSummaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSummaryHeaderView.swift; sourceTree = "<group>"; };
+		AEAEC76E288F21D000812B1C /* AccountSummaryHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountSummaryHeaderView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,11 +73,12 @@
 			isa = PBXGroup;
 			children = (
 				AEAEC7432887D13200812B1C /* AppDelegate.swift */,
+				AEAEC767288EF00500812B1C /* MainViewController.swift */,
 				AEAEC7582887D5F000812B1C /* Login */,
 				AEAEC75B2887DCDF00812B1C /* Onboarding */,
+				AEAEC769288F1B9C00812B1C /* AccountSummary */,
 				AEAEC762288EC4CF00812B1C /* Utils */,
 				AEAEC7572887D55900812B1C /* Files */,
-				AEAEC767288EF00500812B1C /* MainViewController.swift */,
 			);
 			path = "bankey-app";
 			sourceTree = "<group>";
@@ -112,6 +119,16 @@
 				AEAEC765288EEE1F00812B1C /* UIViewController+Utils.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		AEAEC769288F1B9C00812B1C /* AccountSummary */ = {
+			isa = PBXGroup;
+			children = (
+				AEAEC76A288F1BC000812B1C /* AccountSummaryViewController.swift */,
+				AEAEC76C288F218400812B1C /* AccountSummaryHeaderView.swift */,
+				AEAEC76E288F21D000812B1C /* AccountSummaryHeaderView.xib */,
+			);
+			path = AccountSummary;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +189,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEAEC76F288F21D000812B1C /* AccountSummaryHeaderView.xib in Resources */,
 				AEAEC7502887D13300812B1C /* LaunchScreen.storyboard in Resources */,
 				AEAEC74D2887D13300812B1C /* Assets.xcassets in Resources */,
 			);
@@ -187,10 +205,12 @@
 				AEAEC766288EEE1F00812B1C /* UIViewController+Utils.swift in Sources */,
 				AEAEC75A2887D69F00812B1C /* LoginView.swift in Sources */,
 				AEAEC764288EC4E000812B1C /* LocalState.swift in Sources */,
+				AEAEC76D288F218400812B1C /* AccountSummaryHeaderView.swift in Sources */,
 				AEAEC761288EAB4F00812B1C /* DummyViewController.swift in Sources */,
 				AEAEC7482887D13200812B1C /* LoginViewController.swift in Sources */,
 				AEAEC75F2887E29D00812B1C /* OnboardingViewController.swift in Sources */,
 				AEAEC768288EF00500812B1C /* MainViewController.swift in Sources */,
+				AEAEC76B288F1BC000812B1C /* AccountSummaryViewController.swift in Sources */,
 				AEAEC7442887D13200812B1C /* AppDelegate.swift in Sources */,
 				AEAEC75D2887DD1E00812B1C /* OnboardingContainerViewController.swift in Sources */,
 			);
