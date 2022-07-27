@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let mainViewController = MainViewController()
+    let accountSummaryViewController = AccountSummaryViewController()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
@@ -21,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
         
-        window?.rootViewController = mainViewController
+        window?.rootViewController = accountSummaryViewController
+//        window?.rootViewController = mainViewController
 //        mainViewController.selectedIndex = 1  // how to select another tab programmatically
         return true
     }
